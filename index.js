@@ -1,13 +1,22 @@
 const inquirer = require('inquirer');
 require('dotenv').config();
 
-const mySql2 = require('mysql2')
+// get the client
+const mysql = require('mysql2');
+
+// create the connection to database
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'test'
+});
 
 const chooseSection = ()=> {
     inquirer.prompt([
       {
         type: 'list',
-        name: 'chooseSection',
+        name: 'menu',
         message: 'Choose from the following options:',
         choices: [
             "view all departments",
@@ -16,7 +25,8 @@ const chooseSection = ()=> {
             "add a department",
             "add a role",
             "add an employee",
-            "update employee role"
+            "update employee role",
+            "quit"
 
         ]
       },
@@ -24,17 +34,28 @@ const chooseSection = ()=> {
   
     ])
   
-    .then(response => {
-        switch (expression) {
+    .then(async response => {
+        switch (response.menu) {
             case "view all departments":
+                const allDepartments = await connection.promise().query(
+                    'SELECT * FROM `department`'
+                     //async //await
+                  ); 
+                  console.table(allDepartments);
               //open view all dept
               //result of expression matches value1
             break;
             case "view all roles":
+                const allRoles = await connection.promise().query(
+                    'SELECT role.id, role.title, role.salary, department.name FROM `role`LEFT JOIN department ON role.department_id = department.id '
+                     //async //await
+                  ); 
+                  console.table(allRoles);
               //open all roles
               //result of expression matches value2
               break;
             case "add a role":
+                addRole();
               //open all employee
             //   //result of expression matches valueN
             break;
@@ -60,10 +81,12 @@ const chooseSection = ()=> {
             //   //result of expression matches valueN
             break;
           }
+          chooseSection();   
       }
+
     );
-  
-  };
+   
+};
 
 
 
