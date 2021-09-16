@@ -1,4 +1,7 @@
 const inquirer = require('inquirer');
+require('dotenv').config();
+
+const mySql2 = require('mysql2')
 
 const chooseSection = ()=> {
     inquirer.prompt([
