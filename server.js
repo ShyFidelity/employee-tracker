@@ -9,7 +9,6 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'test'
 });
 
 const chooseSection = ()=> {
@@ -42,8 +41,7 @@ const chooseSection = ()=> {
                      //async //await
                   ); 
                   console.table(allDepartments);
-              //open view all dept
-              //result of expression matches value1
+    
             break;
             case "view all roles":
                 const allRoles = await connection.promise().query(
@@ -51,19 +49,12 @@ const chooseSection = ()=> {
                      //async //await
                   ); 
                   console.table(allRoles);
-              //open all roles
-              //result of expression matches value2
               break;
             case "add a role":
                 addRole();
-              //open all employee
-            //   //result of expression matches valueN
             break;
             case "view all employees":
-            // [default:
-            //   //Statements executed when none of
-            //   //the values match the value of the expression
-            //   [break;]
+            break;        
             case "add a department":
                    //open all employee
             //   //result of expression matches valueN
@@ -120,7 +111,7 @@ const addRole = ()=> {
     
     ])
     .then(response => {
-        //add to SQL Database
+        //INSERT INTO role title, salary, department_id VALUES (?), (?), (?);
       });
 }
 

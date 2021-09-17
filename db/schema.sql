@@ -21,6 +21,7 @@ CREATE TABLE employee (
   id INT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
   last_name DECIMAL,
+  hobby VARCHAR(30) NOT NULL,
   role_id INT,
   manager_id INT,
   FOREIGN KEY (role_id) REFERENCES role(id),
