@@ -51,7 +51,9 @@ const chooseSection = ()=> {
                   console.table(allRoles);
               break;
             case "add a role":
+           
                 addRole();
+
             break;
             case "view all employees":
             break;        
@@ -72,13 +74,12 @@ const chooseSection = ()=> {
             //   //result of expression matches valueN
             break;
           }
-          chooseSection();   
+       
       }
 
     );
    
 };
-
 
 
 //add a role 
@@ -110,10 +111,21 @@ const addRole = ()=> {
       },
     
     ])
-    .then(response => {
-        //INSERT INTO role title, salary, department_id VALUES (?), (?), (?);
-      });
-}
+    .then(async response => {
+      console.log(response);
+      const newRol = await connection.promise().query(
+        "INSERT INTO role (addRole, salary, department) VALUES (?, ?, ?);",
+        [
+          response.first_name,
+          response.last_name,
+          response.manager_name,
+          response.role_id,
+        ]
+      );
+      console.log("Employee Added"),
+ 
+        chooseSection();
+      })
 
-
-chooseSection();
+    }
+chooseSection()
