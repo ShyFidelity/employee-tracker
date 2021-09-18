@@ -4,12 +4,13 @@ require('dotenv').config();
 // get the client
 const mysql = require('mysql2');
 
-// create the connection to database
+// create the connection to database 
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
 });
+
 
 const chooseSection = ()=> {
     inquirer.prompt([
@@ -32,7 +33,7 @@ const chooseSection = ()=> {
     
   
     ])
-  
+  //switch statement to find an answer 
     .then(async response => {
         switch (response.menu) {
             case "view all departments":
@@ -45,7 +46,7 @@ const chooseSection = ()=> {
             break;
             case "view all roles":
                 const allRoles = await connection.promise().query(
-                    'SELECT role.id, role.title, role.salary, department.name FROM `role`LEFT JOIN department ON role.department_id = department.id '
+                    'SELECT roles.id, roles.title, roles.salary, department.name FROM `roles`LEFT JOIN department ON roles.department_id = department.id '
                      //async //await
                   ); 
                   console.table(allRoles);
@@ -58,20 +59,17 @@ const chooseSection = ()=> {
             case "view all employees":
             break;        
             case "add a department":
-                   //open all employee
-            //   //result of expression matches valueN
+                   //add a new dept using inquirer 
+           
             break;
             case "add a role":
-                   //open all employee
-            //   //result of expression matches valueN
+            addRole();
             break;
             case "add an employee":
-                   //open all employee
-            //   //result of expression matches valueN
+            addEmployee();
             break;
             case "add an employee role":
-                   //open all employee
-            //   //result of expression matches valueN
+                 //function to add employee to a role
             break;
           }
        
@@ -113,18 +111,19 @@ const addRole = ()=> {
     ])
     .then(async response => {
       console.log(response);
-      const newRole = await connection.promise().query(
-        "INSERT INTO dept_db (addRole, salary, department) VALUES (?, ?, ?);",
+      
+      await connection.promise().query(
+        "INSERT INTO roles (addRole, title, salary, department) VALUES (?, ?, ?, ?);",
         [
           response.id,
           response.title,
           response.salary,
-          response.role_id,
+          response.department_id,
         ]
       );
-      console.log("Role Added"),
+      console.log("Employee added");
  
-        chooseSection();
+    chooseSection();
       })
 
     }

@@ -1,0 +1,27 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "Track employees easily",
+  "main": "server.js",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "inquirer": "^8.1.5",
+    "mysql2": "^2.3.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShyFidelity/employee-tracker.git"
+  },
+  "author": "Jillian FitzMaurice",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShyFidelity/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/ShyFidelity/employee-tracker#readme"
+}
