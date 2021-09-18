@@ -29,7 +29,8 @@ For this project we used mySQL, and mySQL2, and inquirer. We used a schema to cr
 ## Technologies Use
 <p><a href="https://nodejs.org/">Node.js</a></p>
 <p><a href="https://www.npmjs.com/">NPM</a></p>
-<p><a href="https://www.npmjs.com/package/inquirer">Inquirer.js</a></p>
+<p><a href="https://www.npmjs.com/package/inquirer">Inquirer.js</a><p>
 <p><a href="https://www.mysql.com/">mySQL</a></p>
 <p><a href="https://www.npmjs.com/package/mysql2">mySQL2</a></p>
+<p><a href="https://www.npmjs.com/package/console.table">console</a><p>
 
