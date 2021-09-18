@@ -22,7 +22,8 @@ For this project we used mySQL, and mySQL2, and inquirer. We used a schema to cr
 
 
 ## Screenshots
-![])(./)
+![](./assets/employeeSS1.png)
+![](./assets/employeeSS2.png)
 
 
 ## Technologies Use
