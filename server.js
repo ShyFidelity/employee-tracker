@@ -113,16 +113,16 @@ const addRole = ()=> {
     ])
     .then(async response => {
       console.log(response);
-      const newRol = await connection.promise().query(
-        "INSERT INTO role (addRole, salary, department) VALUES (?, ?, ?);",
+      const newRole = await connection.promise().query(
+        "INSERT INTO dept_db (addRole, salary, department) VALUES (?, ?, ?);",
         [
-          response.first_name,
-          response.last_name,
-          response.manager_name,
+          response.id,
+          response.title,
+          response.salary,
           response.role_id,
         ]
       );
-      console.log("Employee Added"),
+      console.log("Role Added"),
  
         chooseSection();
       })
