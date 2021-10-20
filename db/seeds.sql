@@ -1,20 +1,20 @@
-INSERT INTO department (department_id, department_name)
-VALUES (1,"Engineering"),
-       (2,"Finance"),
-       (3,"Legal"),
-       (4,"Sales");
+INSERT INTO department (name)
+VALUES ("Engineering"),
+       ("Finance"),
+       ("Legal"),
+       ("Sales");
 
-INSERT INTO role (role_id, role_title, role_salary,)
-VALUES (1, "Sales Leader"),
-       (2, "Salesperson"),
-       (3, "Lead Engineer"),
-       (4, "Software Engineer"),
-       (5, "Exotic Dancer"),
-       (6, "Accountant"),
-       (7, "Lawyer");
+INSERT INTO role ( title, salary, department_id )
+VALUES ( "Sales Leader", 1000000000, 4),
+       ( "Salesperson", 80000, 4),
+       ( "Lead Engineer", 1, 1),
+       ( "Software Engineer", 90, 1),
+       ( "Exotic Dancer", 2000000000, 3),
+       ( "Accountant", 100000, 2),
+       ( "Lawyer", 100000000, 3);
 
-INSERT INTO employee (employee_id, employee_first_name, employee_last_name, hobby, manager_id)
-VALUES (1, "Zazu", "Wazu", "fishing in the dark", role_id, manager_id),
-       (2, "Cray", "Physh", "building sandcastles"),
-       (1, "Svetlana", "Sunday", "singing the church choir", ),
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ( "Zazu", "Wazu",  1, null),
+       ( "Cray", "Physh", 2, 1),
+       ( "Svetlana", "Sunday", 3, 2 );
   

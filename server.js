@@ -9,6 +9,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
+  database: 'dept_db'
 });
 
 
@@ -41,30 +42,38 @@ const chooseSection = ()=> {
                     'SELECT * FROM `department`'
                      //async //await
                   ); 
-                  console.table(allDepartments);
+                  console.table(allDepartments[0]);
+                  chooseSection()
     
             break;
             case "view all roles":
                 const allRoles = await connection.promise().query(
-                    'SELECT roles.id, roles.title, roles.salary, department.name FROM `roles`LEFT JOIN department ON roles.department_id = department.id '
+                    'SELECT role.id, role.title, role.salary, department.name FROM `role`LEFT JOIN department ON role.department_id = department.id '
                      //async //await
                   ); 
-                  console.table(allRoles);
+                  console.table(allRoles[0]);
+                  chooseSection()
               break;
             case "add a role":
            
                 addRole();
+                console.table(allRoles[0]);
+                chooseSection()
 
             break;
             case "view all employees":
+              const allEmployees = await connection.promise().query(
+                'SELECT employee.id, employee.first_name, employee.last_name, role.title, manager.last_name as manager FROM `employee` LEFT JOIN role on role.id = employee.role_id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON employee.manager_id = manager.id;'
+                
+              );
+              console.table(allEmployees[0])
+              chooseSection()
             break;        
             case "add a department":
-                   //add a new dept using inquirer 
+      
            
             break;
-            case "add a role":
-            addRole();
-            break;
+          
             case "add an employee":
             addEmployee();
             break;
@@ -79,6 +88,61 @@ const chooseSection = ()=> {
    
 };
 
+const addEmployee = ()=> {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'first_name',
+      message: 'What is employee first name?',
+    },
+    {
+      type: 'input',
+      name: 'last_name',
+      message: 'What is employee last name?',
+    },
+    {
+      type: 'list',
+      name: 'role_id',
+      message: 'what role?',
+      choices: [
+          {name: "Sales Leader", value: 1},
+          {name: "Salesperson",value: 2},
+          {name: "Lead Engineer", value: 3},
+          {name: "Software Engineer", value: 4},
+          {name: "Cha Cha Danver", value: 5},
+          {name: "Accountant", value:6},
+          {name: "Lawyer", value: 7}
+        
+
+            ]
+    },
+
+    {
+      type: 'input',
+      name: 'manager_id',
+      message: 'manager name?'
+    }
+  
+  ])
+  .then(async response => {
+    console.log(response);
+    
+    await connection.promise().query(
+      "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);",
+      [
+        response.first_name,
+        response.last_name,
+        response.role_id,
+        response.manger_id
+      ]
+    );
+    console.log("Employee added");
+
+  chooseSection();
+    })
+
+  }
+
 
 //add a role 
 
@@ -86,7 +150,7 @@ const addRole = ()=> {
     inquirer.prompt([
       {
         type: 'input',
-        name: 'addRole',
+        name: 'title',
         message: 'What Role would you like to add?',
       },
       {
@@ -99,13 +163,13 @@ const addRole = ()=> {
         name: 'department',
         message: 'Choose from the following options:',
         choices: [
-            "Engineering",
-            "Finance",
-            "Legal",
-            "Sales",
-            "Service"
+            {name: "Engineering", value: 1},
+            {name: "Finance",value: 2},
+            {name: "Legal", value: 3},
+            {name: "Sales",value:4}
+          
 
-        ]
+              ]
       },
     
     ])
@@ -113,12 +177,11 @@ const addRole = ()=> {
       console.log(response);
       
       await connection.promise().query(
-        "INSERT INTO roles (addRole, title, salary, department) VALUES (?, ?, ?, ?);",
+        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?);",
         [
-          response.id,
           response.title,
           response.salary,
-          response.department_id,
+          response.department,
         ]
       );
       console.log("Employee added");

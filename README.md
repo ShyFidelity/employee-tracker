@@ -10,7 +10,7 @@
 This is an application used to keep track of employees, their salaries, roles and what department they are in. You are able to change and add data to each category. 
 
 ## What was learned
-For this project we used mySQL, and mySQL2, and inquirer. We used a schema to create our database and tables. 
+For this project we used mySQL, and mySQL2, and inquirer. We used a schema to create our database and tables and a seeds file to start inserting some starter files. 
 
 
 ## Usage
