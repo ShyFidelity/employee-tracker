@@ -48,7 +48,7 @@ const chooseSection = ()=> {
             break;
             case "view all roles":
                 const allRoles = await connection.promise().query(
-                    'SELECT role.id, role.title, role.salary, department.name FROM `role`LEFT JOIN department ON role.department_id = department.id '
+                    'SELECT role.id, role.title, role.salary, department.name FROM `role`LEFT JOIN department ON role.department_id = department.id;'
                      //async //await
                   ); 
                   console.table(allRoles[0]);
@@ -57,8 +57,6 @@ const chooseSection = ()=> {
             case "add a role":
            
                 addRole();
-                console.table(allRoles[0]);
-                chooseSection()
 
             break;
             case "view all employees":
